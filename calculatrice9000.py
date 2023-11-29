@@ -2,6 +2,9 @@ list_operation = ["+", "-", "*","/", "//", "%","**"]
 list_multiplication = ["*","x","X"]
 list_puissance = ["**","xx","XX"]
 
+# Liste pour stocker l'historique des calculs
+historique_calculs = []
+
 #Demande le nombre et verifie que la valeur saisie par l'utilisateur est bien un nombre
 def demander_nombre():
     chiffre = 0
@@ -49,8 +52,23 @@ while True: #permet de relancer le programe directement apres qu'il ai trouver u
     elif calcul in list_puissance:
         resultats = nombre1 ** nombre2
 
-    # Vérifie si le résultat est un nombre entier
+    # Vérifie si le résultat (float) est un nombre entier, et le converti en int si c'est le cas
     if resultats.is_integer():
         resultats = int(resultats)
 
     print(resultats)
+
+    #Historique
+
+    # Ajoute le calcul à l'historique
+    historique_calculs.append(f"{nombre1} {calcul} {nombre2} = {resultats}")
+
+    # Affiche l'historique
+    print("\nHistorique des calculs:") #/n ajoute un saut de ligne
+    for calcul in historique_calculs:
+        print(calcul)
+
+    # Demande à l'utilisateur s'il souhaite effacer l'historique
+    reponse = input("\nVoulez-vous effacer l'historique des calculs ? (O/N) : ")
+    if reponse.lower() == "o":
+        historique_calculs = []  # Efface l'historique
